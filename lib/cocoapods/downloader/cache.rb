@@ -161,59 +161,14 @@ module Pod
       #
       # @return [Void]
       #
-      # def ensure_matching_version
-      #   version_file = root + 'VERSION'
-      #   version = version_file.read.strip if version_file.file?
-
-      #   root.rmtree if version != Pod::VERSION && root.exist?
-      #   root.mkpath
-
-      #   version_file.open('w') { |f| f << Pod::VERSION }
-      # end
       def ensure_matching_version
-        puts "【Debug】【1】ensure_matching_version start"
-        
-        puts "【Debug】【2】列出目录 #{root} 下的文件 \n#{`ls -lh #{root}`}"
-        # puts "【Debug】【3】计算目录 #{root} 下的文件数量 \n#{`find #{root} -type f | wc -l`}"
-        
         version_file = root + 'VERSION'
-        puts "【Debug】【3】version_file: #{version_file}"
-        if version_file.file?
-          # 读取文件内容
-          puts "【Debug】【3.1】version_file is file"
-          version = version_file.read.strip
-          if version
-            puts "【Debug】【3.1.1】version: #{version}"
-          else
-            puts "【Debug】【3.1.2】version not exist && cat version_file #{`cat #{version_file}`}"
-          end
-        else
-          puts "【Debug】【3.2】version_file not file or not exist"
-        end
-        
-        puts "【Debug】【4】Pod::VERSION: #{Pod::VERSION}"
-        if version != Pod::VERSION
-          puts "【Debug】【4.1】version #{version} != Pod::VERSION #{Pod::VERSION}"
-          if root.exist?
-            puts "【Debug】【4.1.1】root.exist && root.rmtree"
-            # 不执行删除操作
-            # root.rmtree
-          else
-            puts "【Debug】【4.1.2】root not exist"
-          end
-        else
-          puts "【Debug】【4.2】version #{version} == Pod::VERSION #{Pod::VERSION}"
-        end
-        
-        puts "【Debug】【5】root.mkpath before && ls -lh #{root} \n#{`ls -lh #{root}`}"
-        root.mkpath
-        puts "【Debug】【6】root.mkpath after && ls -lh #{root} \n#{`ls -lh #{root}`}"
-        
-        puts "【Debug】【7】write before && cat version_file #{`cat #{version_file}`} && version_file.read.strip #{version_file.read.strip}"
-        version_file.open('w') { |f| f << Pod::VERSION }
-        puts "【Debug】【8】write after && cat version_file #{`cat #{version_file}`} && version_file.read.strip #{version_file.read.strip}"
+        version = version_file.read.strip if version_file.file?
 
-        puts "【Debug】【9】ensure_matching_version end"
+        root.rmtree if version != Pod::VERSION && root.exist?
+        root.mkpath
+
+        version_file.open('w') { |f| f << Pod::VERSION }
       end
 
       # @param  [Request] request
