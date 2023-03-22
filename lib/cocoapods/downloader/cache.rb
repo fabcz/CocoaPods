@@ -196,8 +196,8 @@ module Pod
           puts "【Debug】【4.1】version #{version} != Pod::VERSION #{Pod::VERSION}"
           if root.exist?
             puts "【Debug】【4.1.1】root.exist && root.rmtree"
-            # 执行删除操作
-            root.rmtree
+            # 不执行删除操作
+            # root.rmtree
           else
             puts "【Debug】【4.1.2】root not exist"
           end
